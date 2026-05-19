@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
-import { Zap, CircuitBoard, Gauge, ArrowRight } from "lucide-react";
+import { Zap, CircuitBoard, Gauge, ArrowRight, Network, Smartphone } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
