@@ -19,17 +19,17 @@ const plans = [
     save: null,
   },
   {
+    id: "quarterly",
+    name: "Quarterly",
+    price: "$12.99",
+    cadence: "/3mo",
+    save: "Save 13%",
+  },
+  {
     id: "yearly",
     name: "Yearly",
     price: "$39.99",
     cadence: "/yr",
-    save: "Save 33%",
-  },
-  {
-    id: "lifetime",
-    name: "Lifetime",
-    price: "$89",
-    cadence: "once",
     save: "Best value",
   },
 ];
