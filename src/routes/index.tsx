@@ -7,9 +7,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "E-Light — Electrical Circuit Simulator" },
-      { name: "description", content: "Design, simulate and learn electrical circuits on the go with E-Light." },
+      { name: "description", content: "E-Light is a complete electrical lab. Wire real components, simulate live voltage and current, troubleshoot faults — for learning, designing, and testing any wiring circuit." },
       { property: "og:title", content: "E-Light — Electrical Circuit Simulator" },
-      { property: "og:description", content: "Design, simulate and learn electrical circuits on the go with E-Light." },
+      { property: "og:description", content: "E-Light is a complete electrical lab. Wire real components, simulate live voltage and current, troubleshoot faults — for learning, designing, and testing any wiring circuit." },
     ],
   }),
   component: Splash,
