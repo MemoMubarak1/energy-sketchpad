@@ -114,7 +114,7 @@ function Subscription() {
           Continue with {plans.find((p) => p.id === selected)?.name}
         </Button>
         <p className="mt-3 text-center text-xs text-muted-foreground">
-          Cancel anytime · Secure billing · 7-day money-back guarantee
+          Cancel anytime · Secure billing · 3-day money-back guarantee
         </p>
       </div>
     </AppShell>
