@@ -19,17 +19,17 @@ const plans = [
     save: null,
   },
   {
+    id: "quarterly",
+    name: "Quarterly",
+    price: "$12.99",
+    cadence: "/3mo",
+    save: "Save 13%",
+  },
+  {
     id: "yearly",
     name: "Yearly",
     price: "$39.99",
     cadence: "/yr",
-    save: "Save 33%",
-  },
-  {
-    id: "lifetime",
-    name: "Lifetime",
-    price: "$89",
-    cadence: "once",
     save: "Best value",
   },
 ];
@@ -114,7 +114,7 @@ function Subscription() {
           Continue with {plans.find((p) => p.id === selected)?.name}
         </Button>
         <p className="mt-3 text-center text-xs text-muted-foreground">
-          Cancel anytime · Secure billing · 7-day money-back guarantee
+          Cancel anytime · Secure billing · 3-day money-back guarantee
         </p>
       </div>
     </AppShell>

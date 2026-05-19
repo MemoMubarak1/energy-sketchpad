@@ -54,20 +54,17 @@ function SettingsPage() {
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="e">Email</Label>
-              <Input id="e" defaultValue="ada@elight.app" />
+              <Input id="e" defaultValue="ada@elight.app" readOnly disabled />
             </div>
             <Button className="bg-gradient-primary hover:opacity-95">Save changes</Button>
           </Section>
 
           <Section icon={Bell} title="Notifications" desc="Decide what we ping you about">
-            <Row label="Simulation finished"><Switch defaultChecked /></Row>
-            <Row label="Weekly project digest"><Switch defaultChecked /></Row>
             <Row label="Product updates"><Switch /></Row>
           </Section>
 
           <Section icon={Palette} title="Appearance" desc="Theme & editor preferences">
             <Row label="Dark mode"><Switch /></Row>
-            <Row label="Grid snap"><Switch defaultChecked /></Row>
             <Row label="Show component labels"><Switch defaultChecked /></Row>
           </Section>
 

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Play, Save, Share2, Zap } from "lucide-react";
+import { ArrowLeft, Save, Zap } from "lucide-react";
 
 export const Route = createFileRoute("/simulator")({
   head: () => ({ meta: [{ title: "Simulator — E-Light" }] }),
@@ -25,11 +25,7 @@ function Simulator() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm"><Share2 className="h-4 w-4" /></Button>
             <Button variant="outline" size="sm"><Save className="mr-1.5 h-4 w-4" /> Save</Button>
-            <Button size="sm" className="bg-gradient-primary hover:opacity-95">
-              <Play className="mr-1.5 h-4 w-4" /> Run
-            </Button>
           </div>
         </div>
 
