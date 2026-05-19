@@ -7,9 +7,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "E-Light — Electrical Circuit Simulator" },
-      { name: "description", content: "Design, simulate and learn electrical circuits on the go with E-Light." },
+      { name: "description", content: "E-Light is a complete electrical lab. Wire real components, simulate live voltage and current, troubleshoot faults — for learning, designing, and testing any wiring circuit." },
       { property: "og:title", content: "E-Light — Electrical Circuit Simulator" },
-      { property: "og:description", content: "Design, simulate and learn electrical circuits on the go with E-Light." },
+      { property: "og:description", content: "E-Light is a complete electrical lab. Wire real components, simulate live voltage and current, troubleshoot faults — for learning, designing, and testing any wiring circuit." },
     ],
   }),
   component: Splash,
@@ -36,7 +36,7 @@ function Splash() {
             Build circuits at the <span className="text-gradient">speed of thought</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-            E-Light is a pocket-sized electrical lab. Connect components, simulate real-time voltage and current — anywhere.
+            E-Light is a complete electrical lab. Wire real components, simulate live voltage and current, troubleshoot faults — for learning, designing, and testing any wiring circuit.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
