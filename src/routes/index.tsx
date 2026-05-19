@@ -36,7 +36,7 @@ function Splash() {
             Build circuits at the <span className="text-gradient">speed of thought</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-            E-Light is a pocket-sized electrical lab. Sketch, simulate and ship your circuit ideas — anywhere.
+            E-Light is a pocket-sized electrical lab. Connect components, simulate real-time voltage and current — anywhere.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
