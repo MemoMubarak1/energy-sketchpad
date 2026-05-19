@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Play, Save, Share2, Zap } from "lucide-react";
+import { ArrowLeft, Save, Zap } from "lucide-react";
 
 export const Route = createFileRoute("/simulator")({
   head: () => ({ meta: [{ title: "Simulator — E-Light" }] }),
