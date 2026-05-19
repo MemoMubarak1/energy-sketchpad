@@ -50,11 +50,12 @@ function Splash() {
             </Link>
           </div>
 
-          <div className="mt-20 grid w-full max-w-3xl grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="mt-20 grid w-full max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { icon: CircuitBoard, title: "Drag & drop", desc: "Resistors, capacitors, sources." },
               { icon: Gauge, title: "Live measurements", desc: "Probe voltage and current in real time." },
-              { icon: Zap, title: "Learn fast", desc: "Guided lessons from Ohm's law to op-amps." },
+              { icon: Network, title: "Connect everything", desc: "Wire up full residential and industrial circuits." },
+              { icon: Smartphone, title: "Any device", desc: "One subscription unlocks mobile, tablet and desktop." },
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="rounded-2xl border border-border bg-card/60 p-5 text-left backdrop-blur">
                 <Icon className="h-5 w-5 text-primary" />
