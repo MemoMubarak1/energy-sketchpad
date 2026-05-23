@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
-import { Button } from "@/components/ui/button";
-import { Zap, CircuitBoard, Gauge, ArrowRight, Network, Smartphone } from "lucide-react";
+import { Cpu, Calculator, Mail, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -12,58 +11,66 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "E-Light is a complete electrical lab. Wire real components, simulate live voltage and current, troubleshoot faults — for learning, designing, and testing any wiring circuit." },
     ],
   }),
-  component: Splash,
+  component: Home,
 });
 
-function Splash() {
+const actions = [
+  {
+    to: "/dashboard",
+    label: "Simulator",
+    desc: "Open your projects and wire live circuits.",
+    icon: Cpu,
+  },
+  {
+    to: "/calculators",
+    label: "Calculators",
+    desc: "Ohm's law, voltage drop, wire sizing and more.",
+    icon: Calculator,
+  },
+  {
+    to: "/contact",
+    label: "Contact us",
+    desc: "We're here to help.",
+    icon: Mail,
+  },
+] as const;
+
+function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
       <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-8">
-        <header className="flex items-center justify-between">
-          <Logo className="h-9" />
-          <Link to="/auth">
-            <Button variant="ghost" size="sm">Sign in</Button>
-          </Link>
+      <div className="relative mx-auto flex min-h-screen max-w-xl flex-col px-6 py-10">
+        <header className="flex items-center justify-center">
+          <Logo className="h-10" />
         </header>
 
-        <main className="flex flex-1 flex-col items-center justify-center text-center">
-          <div className="mb-8 inline-flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-primary shadow-glow animate-pulse-glow">
-            <Zap className="h-10 w-10 text-primary-foreground" strokeWidth={2.5} />
-          </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight max-w-3xl">
-            Build circuits at the <span className="text-gradient">speed of thought</span>
+        <main className="mt-12 flex flex-1 flex-col">
+          <h1 className="text-center text-3xl font-bold tracking-tight">
+            What would you like to do?
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-            E-Light is a complete electrical lab. Wire real components, simulate live voltage and current, troubleshoot faults — for learning, designing, and testing any wiring circuit.
-          </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Link to="/auth">
-              <Button size="lg" className="bg-gradient-primary shadow-elegant hover:opacity-95">
-                Get started <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link to="/dashboard">
-              <Button size="lg" variant="outline">Try demo</Button>
-            </Link>
-          </div>
-
-          <div className="mt-20 grid w-full max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { icon: CircuitBoard, title: "Drag & drop", desc: "Resistors, capacitors, sources." },
-              { icon: Gauge, title: "Live measurements", desc: "Probe voltage and current in real time." },
-              { icon: Network, title: "Connect everything", desc: "Wire up full residential and industrial circuits." },
-              { icon: Smartphone, title: "Any device", desc: "One subscription unlocks mobile, tablet and desktop." },
-            ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="rounded-2xl border border-border bg-card/60 p-5 text-left backdrop-blur">
-                <Icon className="h-5 w-5 text-primary" />
-                <h3 className="mt-3 font-semibold">{title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
-              </div>
+          <div className="mt-10 flex flex-col gap-4">
+            {actions.map(({ to, label, desc, icon: Icon }) => (
+              <Link
+                key={to}
+                to={to}
+                className="group flex items-center gap-4 rounded-2xl border border-border bg-card/70 p-5 backdrop-blur transition-all hover:border-primary hover:bg-card hover:shadow-elegant"
+              >
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+                  <Icon className="h-6 w-6" strokeWidth={2.2} />
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="text-lg font-semibold">{label}</p>
+                  <p className="text-sm text-muted-foreground">{desc}</p>
+                </div>
+                <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+              </Link>
             ))}
           </div>
+
+          <p className="mt-5 text-center text-sm text-muted-foreground">
+            Report problems, suggest new features or ask any question — we'd love to hear from you.
+          </p>
         </main>
       </div>
     </div>
