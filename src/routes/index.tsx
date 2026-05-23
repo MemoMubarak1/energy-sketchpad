@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
-import { Cpu, Calculator, Mail, ChevronRight } from "lucide-react";
+import { Cpu, Calculator, Mail, Crown, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,6 +32,12 @@ const actions = [
     label: "Contact us",
     desc: "We're here to help.",
     icon: Mail,
+  },
+  {
+    to: "/subscription",
+    label: "Pro",
+    desc: "Unlock full features on every device.",
+    icon: Crown,
   },
 ] as const;
 
