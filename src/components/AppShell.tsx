@@ -1,11 +1,12 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { LayoutDashboard, Cpu, Settings, Crown, LogOut } from "lucide-react";
+import { LayoutDashboard, Cpu, Calculator, Settings, Crown, LogOut } from "lucide-react";
 import { Logo } from "./Logo";
 import { cn } from "@/lib/utils";
 
 const items = [
   { to: "/dashboard", label: "Projects", icon: LayoutDashboard },
   { to: "/simulator", label: "Simulator", icon: Cpu },
+  { to: "/calculators", label: "Calculators", icon: Calculator },
   { to: "/subscription", label: "Pro", icon: Crown },
   { to: "/settings", label: "Settings", icon: Settings },
 ];
@@ -51,7 +52,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Logo className="h-7" />
         </div>
         {children}
-        <nav className="md:hidden fixed bottom-0 inset-x-0 z-50 grid grid-cols-4 border-t border-border bg-background">
+        <nav className="md:hidden fixed bottom-0 inset-x-0 z-50 grid grid-cols-5 border-t border-border bg-background">
           {items.map(({ to, label, icon: Icon }) => {
             const active = pathname.startsWith(to);
             return (
