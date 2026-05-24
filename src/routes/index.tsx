@@ -18,7 +18,7 @@ const actions = [
   {
     to: "/dashboard",
     label: "Simulator",
-    desc: "Wire live circuits.",
+    desc: "Wire live circuits, run live voltage & current simulations.",
     icon: Cpu,
   },
   {
@@ -51,24 +51,24 @@ function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
       <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="relative mx-auto flex min-h-screen max-w-xl flex-col px-6 py-8">
+      <div className="relative mx-auto flex min-h-screen max-w-xl flex-col px-6 py-6">
         <header className="flex items-center justify-center">
           <Logo className="h-10" />
         </header>
 
-        <main className="mt-6 flex flex-1 flex-col justify-center">
+        <main className="mt-5 flex flex-1 flex-col">
           <h1 className="text-center text-2xl font-bold tracking-tight">
             What would you like to do?
           </h1>
 
-          <div className="mt-6 flex flex-col gap-2.5">
+          <div className="mt-5 flex flex-1 flex-col gap-3">
             {actions.map(({ to, label, desc, icon: Icon }) => (
               <Link
                 key={to}
                 to={to}
-                className="group flex items-center gap-3 rounded-2xl border border-border bg-card/70 p-3.5 backdrop-blur transition-all hover:border-primary hover:bg-card hover:shadow-elegant"
+                className="group flex flex-1 items-center gap-3 rounded-2xl border border-border bg-card/70 p-4 backdrop-blur transition-all hover:border-primary hover:bg-card hover:shadow-elegant"
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
                   <Icon className="h-5 w-5" strokeWidth={2.2} />
                 </div>
                 <div className="flex-1 text-left">
