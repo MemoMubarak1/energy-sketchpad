@@ -57,9 +57,10 @@ function Calculators() {
   const current = calcs.find((c) => c.id === active);
 
   return (
+    <AppShell>
     <div className="relative min-h-screen bg-background">
       <div className="absolute inset-0 bg-gradient-hero opacity-50" />
-      <div className="relative mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-8">
+      <div className="relative mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-8 pb-28 md:pb-8">
         <header className="flex items-center justify-between">
           <Link
             to="/"
@@ -69,6 +70,7 @@ function Calculators() {
           </Link>
           <Logo className="h-8" />
         </header>
+
 
         <main className="mt-8 flex-1">
           {!active ? (
