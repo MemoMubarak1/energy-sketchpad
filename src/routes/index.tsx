@@ -62,22 +62,31 @@ function Home() {
           </h1>
 
           <div className="mt-5 flex flex-1 flex-col gap-3">
-            {actions.map(({ to, label, desc, icon: Icon }) => (
-              <Link
-                key={to}
-                to={to}
-                className="group flex flex-1 items-center gap-3 rounded-2xl border border-border bg-card/70 p-4 backdrop-blur transition-all hover:border-primary hover:bg-card hover:shadow-elegant"
-              >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
-                  <Icon className="h-5 w-5" strokeWidth={2.2} />
-                </div>
-                <div className="flex-1 text-left">
-                  <p className="font-semibold">{label}</p>
-                  <p className="text-xs text-muted-foreground">{desc}</p>
-                </div>
-                <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
-              </Link>
-            ))}
+            {actions.map(({ to, label, desc, icon: Icon }, i) => {
+              const isSimulator = i === 0;
+              const isPro = label === "Pro";
+              return (
+                <Link
+                  key={to}
+                  to={to}
+                  className={
+                    "group flex flex-1 items-center gap-3 rounded-2xl border bg-card/70 p-4 backdrop-blur transition-all hover:bg-card hover:shadow-elegant " +
+                    (isSimulator
+                      ? "border-[#c9a84c] ring-1 ring-[#c9a84c]/40 hover:border-[#c9a84c] hover:shadow-[0_0_30px_-5px_#c9a84c33]"
+                      : "border-border hover:border-primary")
+                  }
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+                    <Icon className={"h-5 w-5 " + (isPro ? "text-[#c9a84c]" : "")} strokeWidth={2.2} />
+                  </div>
+                  <div className="flex-1 text-left">
+                    <p className="font-semibold">{label}</p>
+                    <p className="text-xs text-muted-foreground">{desc}</p>
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+                </Link>
+              );
+            })}
           </div>
 
           <p className="mt-4 text-center text-xs text-muted-foreground">
