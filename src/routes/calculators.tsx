@@ -143,6 +143,7 @@ function Calculators() {
         </main>
       </div>
     </div>
+    </AppShell>
   );
 }
 
