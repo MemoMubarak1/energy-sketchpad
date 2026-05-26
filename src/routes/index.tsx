@@ -62,47 +62,22 @@ function Home() {
           </h1>
 
           <div className="mt-5 flex flex-1 flex-col gap-3">
-            {actions.map(({ to, label, desc, icon: Icon }, i) => {
-              const isSimulator = i === 0;
-              const isPro = label === "Pro";
-              return (
-                <Link
-                  key={to}
-                  to={to}
-                  className={
-                    "group relative flex flex-1 items-center gap-3 rounded-2xl border p-4 backdrop-blur transition-all overflow-hidden " +
-                    (isSimulator
-                      ? "gold-card gold-sweep bg-card/90 hover:scale-[1.01]"
-                      : "border-border bg-card/70 hover:bg-card hover:border-primary hover:shadow-elegant")
-                  }
-                >
-                  <div
-                    className={
-                      "relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-primary-foreground " +
-                      (isPro
-                        ? "bg-gold-shine gold-glow"
-                        : isSimulator
-                          ? "bg-gold-shine gold-glow"
-                          : "bg-gradient-primary shadow-glow")
-                    }
-                  >
-                    <Icon className={"h-5 w-5 " + (isPro || isSimulator ? "text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]" : "")} strokeWidth={2.4} />
-                  </div>
-                  <div className="relative flex-1 text-left">
-                    <p className={"font-semibold " + (isSimulator ? "text-[#8a6a1f] dark:text-[#f7e8a8]" : "")}>
-                      {label}
-                      {isSimulator && (
-                        <span className="ml-2 inline-flex items-center rounded-full bg-gold-shine px-2 py-0.5 text-[10px] font-bold text-white shadow-[inset_0_1px_0_rgba(255,243,194,0.4)]">
-                          MAIN
-                        </span>
-                      )}
-                    </p>
-                    <p className="text-xs text-muted-foreground">{desc}</p>
-                  </div>
-                  <ChevronRight className={"relative h-4 w-4 transition-transform group-hover:translate-x-1 " + (isSimulator ? "text-[#c9a84c]" : "text-muted-foreground group-hover:text-primary")} />
-                </Link>
-              );
-            })}
+            {actions.map(({ to, label, desc, icon: Icon }) => (
+              <Link
+                key={to}
+                to={to}
+                className="group relative flex flex-1 items-center gap-3 rounded-2xl border border-border bg-card/70 p-4 backdrop-blur transition-all hover:border-primary hover:bg-card hover:shadow-elegant"
+              >
+                <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+                  <Icon className="h-5 w-5" strokeWidth={2.4} />
+                </div>
+                <div className="relative flex-1 text-left">
+                  <p className="font-semibold">{label}</p>
+                  <p className="text-xs text-muted-foreground">{desc}</p>
+                </div>
+                <ChevronRight className="relative h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+              </Link>
+            ))}
           </div>
 
           <p className="mt-4 text-center text-xs text-muted-foreground">
