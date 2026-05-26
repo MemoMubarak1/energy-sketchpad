@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SubscriptionRouteImport } from './routes/subscription'
 import { Route as SimulatorRouteImport } from './routes/simulator'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CalculatorsRouteImport } from './routes/calculators'
@@ -31,6 +32,11 @@ const SimulatorRoute = SimulatorRouteImport.update({
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/calculators': typeof CalculatorsRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/home': typeof HomeRoute
   '/settings': typeof SettingsRoute
   '/simulator': typeof SimulatorRoute
   '/subscription': typeof SubscriptionRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/calculators': typeof CalculatorsRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/home': typeof HomeRoute
   '/settings': typeof SettingsRoute
   '/simulator': typeof SimulatorRoute
   '/subscription': typeof SubscriptionRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/calculators': typeof CalculatorsRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
+  '/home': typeof HomeRoute
   '/settings': typeof SettingsRoute
   '/simulator': typeof SimulatorRoute
   '/subscription': typeof SubscriptionRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/calculators'
     | '/contact'
     | '/dashboard'
+    | '/home'
     | '/settings'
     | '/simulator'
     | '/subscription'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/calculators'
     | '/contact'
     | '/dashboard'
+    | '/home'
     | '/settings'
     | '/simulator'
     | '/subscription'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/calculators'
     | '/contact'
     | '/dashboard'
+    | '/home'
     | '/settings'
     | '/simulator'
     | '/subscription'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   CalculatorsRoute: typeof CalculatorsRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
+  HomeRoute: typeof HomeRoute
   SettingsRoute: typeof SettingsRoute
   SimulatorRoute: typeof SimulatorRoute
   SubscriptionRoute: typeof SubscriptionRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorsRoute: CalculatorsRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
+  HomeRoute: HomeRoute,
   SettingsRoute: SettingsRoute,
   SimulatorRoute: SimulatorRoute,
   SubscriptionRoute: SubscriptionRoute,
