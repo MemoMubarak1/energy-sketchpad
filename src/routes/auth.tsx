@@ -19,6 +19,7 @@ function AuthPage() {
       <div className="absolute inset-0 bg-gradient-hero opacity-60" />
       <div className="relative mx-auto flex min-h-screen max-w-md flex-col px-6 py-10">
         <Link to="/" className="mb-12 self-start">
+
           <Logo className="h-8" />
         </Link>
 
@@ -34,7 +35,7 @@ function AuthPage() {
             className="mt-6 space-y-4"
             onSubmit={(e) => {
               e.preventDefault();
-              navigate({ to: "/dashboard" });
+              navigate({ to: "/home" });
             }}
           >
             {mode === "signup" && (
@@ -60,7 +61,7 @@ function AuthPage() {
             <div className="h-px flex-1 bg-border" /> OR <div className="h-px flex-1 bg-border" />
           </div>
 
-          <Button variant="outline" className="w-full" onClick={() => navigate({ to: "/dashboard" })}>
+          <Button variant="outline" className="w-full" onClick={() => navigate({ to: "/home" })}>
             Continue with Google
           </Button>
 

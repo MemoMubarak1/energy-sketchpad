@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
-import { Cpu, Calculator, Mail, Crown, Settings, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Cpu, Zap, Network, Smartphone, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -11,79 +12,67 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "E-Light is a complete electrical lab. Wire real components, simulate live voltage and current, troubleshoot faults — for learning, designing, and testing any wiring circuit." },
     ],
   }),
-  component: Home,
+  component: Splash,
 });
 
-const actions = [
-  {
-    to: "/dashboard",
-    label: "Simulator",
-    desc: "Wire live circuits, run live voltage & current simulations.",
-    icon: Cpu,
-  },
-  {
-    to: "/calculators",
-    label: "Calculators",
-    desc: "Ohm's law, wire sizing & more.",
-    icon: Calculator,
-  },
-  {
-    to: "/settings",
-    label: "Settings",
-    desc: "Preferences & account.",
-    icon: Settings,
-  },
-  {
-    to: "/subscription",
-    label: "Pro",
-    desc: "Unlock every feature.",
-    icon: Crown,
-  },
-  {
-    to: "/contact",
-    label: "Contact us",
-    desc: "Help & feedback.",
-    icon: Mail,
-  },
-] as const;
+const features = [
+  { icon: Cpu, title: "Real components", desc: "Wire resistors, sources, switches and more on a live canvas." },
+  { icon: Zap, title: "Live simulation", desc: "See voltage and current update in real time as you build." },
+  { icon: Network, title: "Connect everything", desc: "Full residential and industrial circuits in one workspace." },
+  { icon: Smartphone, title: "Any device", desc: "Your subscription works on mobile, tablet and desktop." },
+];
 
-function Home() {
+function Splash() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
       <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="relative mx-auto flex min-h-screen max-w-xl flex-col px-6 py-6">
-        <header className="flex items-center justify-center">
-          <Logo className="h-10" />
+      <div className="relative mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-10">
+        <header className="flex items-center justify-between">
+          <Logo className="h-9" />
+          <Link to="/auth" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+            Sign in
+          </Link>
         </header>
 
-        <main className="mt-5 flex flex-1 flex-col">
-          <h1 className="text-center text-2xl font-bold tracking-tight">
-            What would you like to do?
+        <main className="flex flex-1 flex-col justify-center py-10">
+          <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl">
+            Build, simulate &amp; <span className="bg-gradient-primary bg-clip-text text-transparent">troubleshoot</span> circuits
           </h1>
+          <p className="mx-auto mt-4 max-w-xl text-center text-base text-muted-foreground">
+            E-Light is a complete electrical lab. Wire real components, simulate live voltage and current, troubleshoot faults — for learning, designing, and testing any wiring circuit.
+          </p>
 
-          <div className="mt-5 flex flex-1 flex-col gap-3">
-            {actions.map(({ to, label, desc, icon: Icon }) => (
-              <Link
-                key={to}
-                to={to}
-                className="group relative flex flex-1 items-center gap-3 rounded-2xl border border-border bg-card/70 p-4 backdrop-blur transition-all hover:border-primary hover:bg-card hover:shadow-elegant"
-              >
-                <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
-                  <Icon className="h-5 w-5" strokeWidth={2.4} />
-                </div>
-                <div className="relative flex-1 text-left">
-                  <p className="font-semibold">{label}</p>
-                  <p className="text-xs text-muted-foreground">{desc}</p>
-                </div>
-                <ChevronRight className="relative h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Button asChild size="lg" className="bg-gradient-primary shadow-glow hover:opacity-95">
+              <Link to="/auth">
+                Get started
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-            ))}
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link to="/auth">I already have an account</Link>
+            </Button>
           </div>
 
-          <p className="mt-4 text-center text-xs text-muted-foreground">
-            Report problems, suggest new features or ask any question — we'd love to hear from you.
-          </p>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2">
+            {features.map(({ icon: Icon, title, desc }) => (
+              <div
+                key={title}
+                className="rounded-2xl border border-border bg-card/70 p-5 backdrop-blur transition-colors hover:border-primary"
+              >
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+                  <Icon className="h-5 w-5" strokeWidth={2.4} />
+                </div>
+                <p className="font-semibold">{title}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
+              </div>
+            ))}
+          </div>
         </main>
+
+        <footer className="text-center text-xs text-muted-foreground">
+          © {new Date().getFullYear()} E-Light. All rights reserved.
+        </footer>
       </div>
     </div>
   );
