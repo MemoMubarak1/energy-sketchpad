@@ -28,16 +28,16 @@ const actions = [
     icon: Calculator,
   },
   {
-    to: "/subscription",
-    label: "Pro",
-    desc: "Unlock every feature.",
-    icon: Crown,
-  },
-  {
     to: "/settings",
     label: "Settings",
     desc: "Preferences & account.",
     icon: Settings,
+  },
+  {
+    to: "/subscription",
+    label: "Pro",
+    desc: "Unlock every feature.",
+    icon: Crown,
   },
   {
     to: "/contact",
