@@ -49,9 +49,6 @@ function Splash() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link to="/auth">I already have an account</Link>
-            </Button>
           </div>
 
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
