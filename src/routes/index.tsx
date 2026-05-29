@@ -44,9 +44,6 @@ function Splash() {
           <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl">
             Build, simulate &amp; <span className="text-gradient">troubleshoot</span> circuits
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-center text-base text-muted-foreground">
-            E-Light is a complete electrical lab. Wire real components, simulate live voltage and current, troubleshoot faults — for learning, designing, and testing any wiring circuit.
-          </p>
 
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Button asChild size="lg" className="bg-gradient-primary shadow-glow hover:opacity-95">
