@@ -35,6 +35,12 @@ function Splash() {
         </header>
 
         <main className="flex flex-1 flex-col justify-center py-10">
+          <div className="mb-8 flex justify-center">
+            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-primary text-primary-foreground shadow-glow animate-pulse-glow">
+              <Zap className="h-12 w-12" strokeWidth={2.4} />
+            </div>
+          </div>
+
           <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl">
             Build, simulate &amp; <span className="text-gradient">troubleshoot</span> circuits
           </h1>
@@ -48,6 +54,9 @@ function Splash() {
                 Get started
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link to="/home">Use as a guest</Link>
             </Button>
           </div>
 
