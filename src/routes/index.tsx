@@ -45,14 +45,14 @@ function Splash() {
             Build, simulate &amp; <span className="text-gradient">troubleshoot</span> circuits
           </h1>
 
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Button asChild size="lg" className="bg-gradient-primary shadow-glow hover:opacity-95">
+          <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
+            <Button asChild size="lg" className="h-14 w-full text-base bg-gradient-primary shadow-glow hover:opacity-95 sm:h-12 sm:w-auto sm:px-8">
               <Link to="/auth">
                 Get started
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" className="h-14 w-full text-base sm:h-12 sm:w-auto sm:px-8">
               <Link to="/home">Use as a guest</Link>
             </Button>
           </div>
