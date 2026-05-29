@@ -36,7 +36,7 @@ function Splash() {
 
         <main className="flex flex-1 flex-col justify-center py-10">
           <div className="mb-8 flex justify-center">
-            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-primary text-primary-foreground shadow-glow animate-pulse-glow">
+            <div className="relative flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow animate-pulse-glow">
               <Zap className="h-12 w-12" strokeWidth={2.4} />
             </div>
           </div>
