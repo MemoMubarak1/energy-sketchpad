@@ -80,6 +80,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "E-Light — Electrical Circuit Simulator" },
+      { name: "twitter:description", content: "Design, simulate and learn electrical circuits on the go." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eaaa8e24-b9c0-48e0-9e5e-fd6ff0a623cf/id-preview-f9a1801e--bf33e4ee-317e-42f9-92b3-71a82de7c15b.lovable.app-1780353123370.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/eaaa8e24-b9c0-48e0-9e5e-fd6ff0a623cf/id-preview-f9a1801e--bf33e4ee-317e-42f9-92b3-71a82de7c15b.lovable.app-1780353123370.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
