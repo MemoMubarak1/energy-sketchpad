@@ -27,19 +27,13 @@ function Splash() {
     <div className="relative min-h-screen overflow-hidden bg-background">
       <div className="absolute inset-0 bg-gradient-hero" />
       <div className="relative mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-10">
-        <header className="flex items-center justify-between">
-          <Logo className="h-9" />
-          <Link to="/auth" className="text-sm font-medium text-muted-foreground hover:text-foreground">
-            Sign in
-          </Link>
-        </header>
-
         <main className="flex flex-1 flex-col justify-center py-10">
           <div className="mb-8 flex justify-center">
-            <div className="relative flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow animate-pulse-glow">
-              <Zap className="h-12 w-12" strokeWidth={2.4} />
+            <div className="relative h-28 w-28 animate-pulse-glow rounded-2xl">
+              <img src={logoIcon.url} alt="E-Light" className="h-full w-full" />
             </div>
           </div>
+
 
           <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl">
             Build, simulate &amp; <span className="text-gradient">troubleshoot</span> circuits
