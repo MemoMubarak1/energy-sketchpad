@@ -18,8 +18,7 @@ function AuthPage() {
     <div className="relative min-h-screen bg-background">
       <div className="absolute inset-0 bg-gradient-hero opacity-60" />
       <div className="relative mx-auto flex min-h-screen max-w-md flex-col px-6 py-10">
-        <Link to="/" className="mb-12 self-start">
-
+        <Link to="/" className="mb-12 self-center">
           <Logo className="h-8" />
         </Link>
 

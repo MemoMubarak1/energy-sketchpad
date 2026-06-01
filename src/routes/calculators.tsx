@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { AppShell } from "@/components/AppShell";
-import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,11 +9,21 @@ import {
   Zap,
   Activity,
   Gauge,
-  Lightbulb,
   Cable,
   Palette,
-  Sigma,
   Calculator as CalcIcon,
+  Cog,
+  SlidersHorizontal,
+  ShieldCheck,
+  AlertTriangle,
+  Settings2,
+  Waves,
+  BatteryCharging,
+  Battery,
+  Power,
+  Fuel,
+  Shield,
+  Columns3,
 } from "lucide-react";
 
 export const Route = createFileRoute("/calculators")({
@@ -24,7 +33,7 @@ export const Route = createFileRoute("/calculators")({
       {
         name: "description",
         content:
-          "Electrical calculators: Ohm's law, power, voltage divider, voltage drop, LED resistor, wire size and resistor color codes.",
+          "Electrical engineering calculators: Ohm's law, power, voltage drop, wire size, motor FLC, VFD, breaker, short circuit, relay, ground fault, PF correction, UPS, battery backup, generator, earthing and busbar.",
       },
     ],
   }),
@@ -34,22 +43,42 @@ export const Route = createFileRoute("/calculators")({
 type CalcId =
   | "ohms"
   | "power"
-  | "divider"
-  | "led"
   | "drop"
   | "wire"
   | "color"
-  | "threephase";
+  | "flc"
+  | "vfd"
+  | "breaker"
+  | "scc"
+  | "relay"
+  | "gfc"
+  | "pfc"
+  | "ups"
+  | "battery"
+  | "gensize"
+  | "fuel"
+  | "earth"
+  | "busbar";
 
 const calcs: { id: CalcId; name: string; desc: string; icon: typeof Zap }[] = [
   { id: "ohms", name: "Ohm's Law", desc: "V, I, R relationships", icon: Zap },
-  { id: "power", name: "Power", desc: "P = V × I", icon: Activity },
-  { id: "divider", name: "Voltage Divider", desc: "Two-resistor output", icon: Sigma },
-  { id: "led", name: "LED Resistor", desc: "Series resistor for an LED", icon: Lightbulb },
-  { id: "drop", name: "Voltage Drop", desc: "Single-phase drop over a run", icon: Gauge },
+  { id: "power", name: "Power Calculator", desc: "Single & 3-phase power", icon: Activity },
+  { id: "drop", name: "Voltage Drop", desc: "Drop across a cable run", icon: Gauge },
   { id: "wire", name: "Wire Size", desc: "Recommended AWG for load", icon: Cable },
   { id: "color", name: "Resistor Color Code", desc: "4-band decoder", icon: Palette },
-  { id: "threephase", name: "3-Phase Power", desc: "Line-to-line power", icon: Activity },
+  { id: "flc", name: "Motor FLC", desc: "Full-load current", icon: Cog },
+  { id: "vfd", name: "VFD Frequency ↔ Speed", desc: "Hz to RPM", icon: SlidersHorizontal },
+  { id: "breaker", name: "Breaker Sizing", desc: "Next standard rating", icon: ShieldCheck },
+  { id: "scc", name: "Short Circuit Current", desc: "Fault current Isc", icon: AlertTriangle },
+  { id: "relay", name: "Relay Setting", desc: "Overcurrent pickup", icon: Settings2 },
+  { id: "gfc", name: "Ground Fault Current", desc: "Earth fault loop", icon: Waves },
+  { id: "pfc", name: "Power Factor Correction", desc: "Capacitor kVAR", icon: Activity },
+  { id: "ups", name: "UPS Sizing", desc: "VA from load", icon: BatteryCharging },
+  { id: "battery", name: "Battery Backup Time", desc: "Runtime estimate", icon: Battery },
+  { id: "gensize", name: "Generator Sizing", desc: "kVA from kW", icon: Power },
+  { id: "fuel", name: "Generator Fuel", desc: "Diesel consumption", icon: Fuel },
+  { id: "earth", name: "Earthing Conductor", desc: "IEC 60364 sizing", icon: Shield },
+  { id: "busbar", name: "Busbar Sizing", desc: "Copper bar ampacity", icon: Columns3 },
 ];
 
 function Calculators() {
@@ -68,7 +97,6 @@ function Calculators() {
           >
             <ArrowLeft className="h-4 w-4" /> Home
           </Link>
-          <Logo className="h-8" />
         </header>
 
 
@@ -129,13 +157,23 @@ function Calculators() {
 
                 <div className="mt-6">
                   {active === "ohms" && <OhmsLaw />}
-                  {active === "power" && <Power />}
-                  {active === "divider" && <Divider />}
-                  {active === "led" && <Led />}
+                  {active === "power" && <PowerCalc />}
                   {active === "drop" && <VDrop />}
                   {active === "wire" && <WireSize />}
                   {active === "color" && <ColorCode />}
-                  {active === "threephase" && <ThreePhase />}
+                  {active === "flc" && <MotorFLC />}
+                  {active === "vfd" && <VFD />}
+                  {active === "breaker" && <Breaker />}
+                  {active === "scc" && <ShortCircuit />}
+                  {active === "relay" && <RelaySetting />}
+                  {active === "gfc" && <GroundFault />}
+                  {active === "pfc" && <PFCorrection />}
+                  {active === "ups" && <UPSSize />}
+                  {active === "battery" && <BatteryTime />}
+                  {active === "gensize" && <GenSize />}
+                  {active === "fuel" && <GenFuel />}
+                  {active === "earth" && <Earthing />}
+                  {active === "busbar" && <Busbar />}
                 </div>
               </div>
             </>
@@ -218,64 +256,47 @@ function OhmsLaw() {
   );
 }
 
-function Power() {
-  const [v, setV] = useState("120");
-  const [i, setI] = useState("2");
-  const p = num(v) * num(i);
+function PowerCalc() {
+  const [phase, setPhase] = useState<"1" | "3">("1");
+  const [v, setV] = useState("230");
+  const [i, setI] = useState("10");
+  const [pf, setPf] = useState("0.9");
+  const p =
+    phase === "1"
+      ? num(v) * num(i) * num(pf)
+      : Math.sqrt(3) * num(v) * num(i) * num(pf);
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-3">
-        <Field label="Voltage" unit="V" value={v} onChange={setV} />
+      <div className="flex gap-2">
+        {(["1", "3"] as const).map((p) => (
+          <Button
+            key={p}
+            type="button"
+            variant={phase === p ? "default" : "outline"}
+            size="sm"
+            onClick={() => setPhase(p)}
+          >
+            {p === "1" ? "1-Phase" : "3-Phase"}
+          </Button>
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-3">
+        <Field label={phase === "1" ? "Voltage" : "Line-Line"} unit="V" value={v} onChange={setV} />
         <Field label="Current" unit="A" value={i} onChange={setI} />
-      </div>
-      <Result label="Power" value={fmt(p)} unit="W" />
-    </div>
-  );
-}
-
-function Divider() {
-  const [vin, setVin] = useState("12");
-  const [r1, setR1] = useState("1000");
-  const [r2, setR2] = useState("2200");
-  const vout = (num(vin) * num(r2)) / (num(r1) + num(r2));
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-3">
-        <Field label="Vin" unit="V" value={vin} onChange={setVin} />
-        <Field label="R1" unit="Ω" value={r1} onChange={setR1} />
-        <Field label="R2" unit="Ω" value={r2} onChange={setR2} />
-      </div>
-      <Result label="Vout" value={fmt(vout)} unit="V" />
-    </div>
-  );
-}
-
-function Led() {
-  const [vs, setVs] = useState("5");
-  const [vf, setVf] = useState("2.1");
-  const [i, setI] = useState("20");
-  const r = (num(vs) - num(vf)) / (num(i) / 1000);
-  const p = (num(vs) - num(vf)) * (num(i) / 1000);
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-3">
-        <Field label="Supply" unit="V" value={vs} onChange={setVs} />
-        <Field label="LED Vf" unit="V" value={vf} onChange={setVf} />
-        <Field label="Current" unit="mA" value={i} onChange={setI} />
+        <Field label="PF" value={pf} onChange={setPf} />
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <Result label="Resistor" value={fmt(r, 1)} unit="Ω" />
-        <Result label="Dissipation" value={fmt(p * 1000, 1)} unit="mW" />
+        <Result label="Real power" value={fmt(p)} unit="W" />
+        <Result label="Real power" value={fmt(p / 1000, 2)} unit="kW" />
       </div>
     </div>
   );
 }
 
 function VDrop() {
-  // Single phase: Vd = 2 * L * I * R / 1000  (R in Ω/km of conductor)
   const [length, setLength] = useState("30");
   const [current, setCurrent] = useState("15");
-  const [r, setR] = useState("8.89"); // 2.5 mm² copper Ω/km
+  const [r, setR] = useState("8.89");
   const [v, setV] = useState("230");
   const vd = (2 * num(length) * num(current) * num(r)) / 1000;
   const pct = (vd / num(v)) * 100;
@@ -296,7 +317,6 @@ function VDrop() {
 }
 
 function WireSize() {
-  // Simple ampacity lookup (copper, 60°C insulation, NEC-style ballpark)
   const [load, setLoad] = useState("20");
   const table = [
     { awg: "14", a: 15 },
@@ -363,10 +383,7 @@ function ColorCode() {
           </option>
         ))}
       </select>
-      <div
-        className="h-2 rounded"
-        style={{ background: colors[val]?.c ?? "#000" }}
-      />
+      <div className="h-2 rounded" style={{ background: colors[val]?.c ?? "#000" }} />
     </div>
   );
   return (
@@ -385,19 +402,271 @@ function ColorCode() {
   );
 }
 
-function ThreePhase() {
+function MotorFLC() {
+  const [hp, setHp] = useState("10");
   const [v, setV] = useState("400");
-  const [i, setI] = useState("16");
-  const [pf, setPf] = useState("0.9");
-  const p = Math.sqrt(3) * num(v) * num(i) * num(pf);
+  const [eff, setEff] = useState("0.9");
+  const [pf, setPf] = useState("0.85");
+  const flc = (num(hp) * 746) / (Math.sqrt(3) * num(v) * num(eff) * num(pf));
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Motor" unit="HP" value={hp} onChange={setHp} />
+        <Field label="Line-Line" unit="V" value={v} onChange={setV} />
+        <Field label="Efficiency" value={eff} onChange={setEff} />
+        <Field label="Power factor" value={pf} onChange={setPf} />
+      </div>
+      <Result label="Full-load current" value={fmt(flc, 2)} unit="A" />
+    </div>
+  );
+}
+
+function VFD() {
+  const [f, setF] = useState("50");
+  const [poles, setPoles] = useState("4");
+  const [slip, setSlip] = useState("3");
+  const sync = (120 * num(f)) / num(poles);
+  const rpm = sync * (1 - num(slip) / 100);
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-3">
-        <Field label="Line-Line" unit="V" value={v} onChange={setV} />
-        <Field label="Line current" unit="A" value={i} onChange={setI} />
-        <Field label="Power factor" value={pf} onChange={setPf} />
+        <Field label="Frequency" unit="Hz" value={f} onChange={setF} />
+        <Field label="Poles" value={poles} onChange={setPoles} />
+        <Field label="Slip" unit="%" value={slip} onChange={setSlip} />
       </div>
-      <Result label="Real power" value={fmt(p / 1000, 2)} unit="kW" />
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="Synchronous" value={fmt(sync, 0)} unit="RPM" />
+        <Result label="Motor speed" value={fmt(rpm, 0)} unit="RPM" />
+      </div>
+    </div>
+  );
+}
+
+function Breaker() {
+  const [load, setLoad] = useState("32");
+  const [continuous, setContinuous] = useState("1.25");
+  const standards = [6, 10, 13, 16, 20, 25, 32, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500, 630, 800, 1000, 1250, 1600];
+  const required = num(load) * num(continuous);
+  const pick = standards.find((s) => s >= required);
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Load current" unit="A" value={load} onChange={setLoad} />
+        <Field label="Multiplier" value={continuous} onChange={setContinuous} placeholder="1.25 continuous" />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="Required" value={fmt(required, 1)} unit="A" />
+        <Result label="Next standard" value={pick ? String(pick) : "—"} unit="A" />
+      </div>
+    </div>
+  );
+}
+
+function ShortCircuit() {
+  const [v, setV] = useState("400");
+  const [z, setZ] = useState("0.05");
+  const isc = num(v) / (Math.sqrt(3) * num(z));
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Line-Line" unit="V" value={v} onChange={setV} />
+        <Field label="Loop impedance" unit="Ω" value={z} onChange={setZ} />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="Isc" value={fmt(isc, 0)} unit="A" />
+        <Result label="Isc" value={fmt(isc / 1000, 2)} unit="kA" />
+      </div>
+    </div>
+  );
+}
+
+function RelaySetting() {
+  const [flc, setFlc] = useState("100");
+  const [ct, setCt] = useState("150");
+  const [mult, setMult] = useState("1.25");
+  const pickup = num(flc) * num(mult);
+  const setting = (pickup / num(ct)) * 100;
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-3">
+        <Field label="Load (FLC)" unit="A" value={flc} onChange={setFlc} />
+        <Field label="CT primary" unit="A" value={ct} onChange={setCt} />
+        <Field label="Multiplier" value={mult} onChange={setMult} />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="Pickup current" value={fmt(pickup, 1)} unit="A" />
+        <Result label="Relay setting" value={fmt(setting, 1)} unit="%" />
+      </div>
+    </div>
+  );
+}
+
+function GroundFault() {
+  const [vln, setVln] = useState("230");
+  const [zs, setZs] = useState("1.2");
+  const igf = num(vln) / num(zs);
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Phase-Neutral" unit="V" value={vln} onChange={setVln} />
+        <Field label="Earth loop Zs" unit="Ω" value={zs} onChange={setZs} />
+      </div>
+      <Result label="Ground fault current" value={fmt(igf, 1)} unit="A" />
+    </div>
+  );
+}
+
+function PFCorrection() {
+  const [p, setP] = useState("100");
+  const [pf1, setPf1] = useState("0.75");
+  const [pf2, setPf2] = useState("0.95");
+  const q = num(p) * (Math.tan(Math.acos(num(pf1))) - Math.tan(Math.acos(num(pf2))));
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-3">
+        <Field label="Real power" unit="kW" value={p} onChange={setP} />
+        <Field label="Existing PF" value={pf1} onChange={setPf1} />
+        <Field label="Target PF" value={pf2} onChange={setPf2} />
+      </div>
+      <Result label="Capacitor required" value={fmt(q, 2)} unit="kVAR" />
+    </div>
+  );
+}
+
+function UPSSize() {
+  const [load, setLoad] = useState("1500");
+  const [pf, setPf] = useState("0.8");
+  const [headroom, setHeadroom] = useState("25");
+  const va = (num(load) / num(pf)) * (1 + num(headroom) / 100);
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-3">
+        <Field label="Load" unit="W" value={load} onChange={setLoad} />
+        <Field label="UPS PF" value={pf} onChange={setPf} />
+        <Field label="Headroom" unit="%" value={headroom} onChange={setHeadroom} />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="UPS size" value={fmt(va, 0)} unit="VA" />
+        <Result label="UPS size" value={fmt(va / 1000, 2)} unit="kVA" />
+      </div>
+    </div>
+  );
+}
+
+function BatteryTime() {
+  const [ah, setAh] = useState("100");
+  const [vb, setVb] = useState("48");
+  const [load, setLoad] = useState("500");
+  const [eff, setEff] = useState("0.85");
+  const hours = (num(ah) * num(vb) * num(eff)) / num(load);
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Battery capacity" unit="Ah" value={ah} onChange={setAh} />
+        <Field label="Battery voltage" unit="V" value={vb} onChange={setVb} />
+        <Field label="Load" unit="W" value={load} onChange={setLoad} />
+        <Field label="Inverter eff." value={eff} onChange={setEff} />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="Backup time" value={fmt(hours, 2)} unit="h" />
+        <Result label="Backup time" value={fmt(hours * 60, 0)} unit="min" />
+      </div>
+    </div>
+  );
+}
+
+function GenSize() {
+  const [kw, setKw] = useState("80");
+  const [pf, setPf] = useState("0.8");
+  const [margin, setMargin] = useState("25");
+  const kva = (num(kw) / num(pf)) * (1 + num(margin) / 100);
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-3">
+        <Field label="Real load" unit="kW" value={kw} onChange={setKw} />
+        <Field label="Power factor" value={pf} onChange={setPf} />
+        <Field label="Margin" unit="%" value={margin} onChange={setMargin} />
+      </div>
+      <Result label="Generator size" value={fmt(kva, 1)} unit="kVA" />
+    </div>
+  );
+}
+
+function GenFuel() {
+  // Approx diesel consumption (L/h) by load percentage of prime rating.
+  const [kva, setKva] = useState("100");
+  const [loadPct, setLoadPct] = useState("75");
+  const lookup: Record<number, Record<number, number>> = {
+    25: { 20: 4, 50: 8, 75: 12, 100: 16 },
+    50: { 20: 7, 50: 14, 75: 19, 100: 25 },
+    100: { 20: 12, 50: 24, 75: 33, 100: 42 },
+    200: { 20: 22, 50: 41, 75: 56, 100: 73 },
+    500: { 20: 50, 50: 95, 75: 132, 100: 170 },
+    1000: { 20: 95, 50: 185, 75: 260, 100: 335 },
+  };
+  // Simple linear approx: 0.22 L/h per kW at full load.
+  const kw = num(kva) * 0.8;
+  const lph = kw * (num(loadPct) / 100) * 0.27;
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Generator" unit="kVA" value={kva} onChange={setKva} />
+        <Field label="Load" unit="%" value={loadPct} onChange={setLoadPct} />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="Consumption" value={fmt(lph, 1)} unit="L/h" />
+        <Result label="Per 8 hours" value={fmt(lph * 8, 0)} unit="L" />
+      </div>
+      <p className="text-xs text-muted-foreground">
+        Diesel approximation (~0.27 L/h per kW). Actual usage depends on engine model and ambient conditions.
+        {lookup ? "" : ""}
+      </p>
+    </div>
+  );
+}
+
+function Earthing() {
+  // IEC 60364: A = sqrt(I^2 * t) / k
+  const [i, setI] = useState("10000");
+  const [t, setT] = useState("1");
+  const [k, setK] = useState("143");
+  const a = Math.sqrt(num(i) * num(i) * num(t)) / num(k);
+  const standards = [1.5, 2.5, 4, 6, 10, 16, 25, 35, 50, 70, 95, 120, 150, 185, 240, 300, 400];
+  const pick = standards.find((s) => s >= a);
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-3">
+        <Field label="Fault current" unit="A" value={i} onChange={setI} />
+        <Field label="Duration" unit="s" value={t} onChange={setT} />
+        <Field label="k factor" value={k} onChange={setK} placeholder="Cu PVC 143" />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="Min. area" value={fmt(a, 2)} unit="mm²" />
+        <Result label="Standard size" value={pick ? String(pick) : "—"} unit="mm²" />
+      </div>
+    </div>
+  );
+}
+
+function Busbar() {
+  // Approximate copper busbar ampacity (A) = 1.2 * A_mm² for natural air cooling
+  const [w, setW] = useState("40");
+  const [t, setT] = useState("5");
+  const area = num(w) * num(t);
+  const ampacity = area * 1.2;
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Width" unit="mm" value={w} onChange={setW} />
+        <Field label="Thickness" unit="mm" value={t} onChange={setT} />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="Cross-section" value={fmt(area, 0)} unit="mm²" />
+        <Result label="Approx ampacity" value={fmt(ampacity, 0)} unit="A" />
+      </div>
+      <p className="text-xs text-muted-foreground">
+        Copper bar, natural convection. Derate for enclosure, ambient and stacking per IEC 61439.
+      </p>
     </div>
   );
 }
