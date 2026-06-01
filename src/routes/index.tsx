@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Cpu, Zap, Network, Smartphone, ArrowRight } from "lucide-react";
+import logoIcon from "@/assets/elight-icon.svg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
