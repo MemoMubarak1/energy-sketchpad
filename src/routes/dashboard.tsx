@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
-import { Button } from "@/components/ui/button";
 import { Plus, CircuitBoard, MoreHorizontal, Clock } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard")({
@@ -19,14 +18,9 @@ function Dashboard() {
   return (
     <AppShell>
       <div className="mx-auto max-w-5xl px-6 py-10 pb-24 md:pb-10">
-        <div className="flex items-end justify-between gap-4 flex-wrap">
-          <div>
-            <p className="text-sm text-muted-foreground">Welcome back</p>
-            <h1 className="mt-1 text-3xl font-bold">My Projects</h1>
-          </div>
-          <Link to="/home">
-            <Button variant="outline">Home</Button>
-          </Link>
+        <div>
+          <p className="text-sm text-muted-foreground">Welcome back</p>
+          <h1 className="mt-1 text-3xl font-bold">My Projects</h1>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
