@@ -40,10 +40,6 @@ function Simulator() {
             }}
           />
         </div>
-      </AppShell>
-  );
-}
-        </div>
       </div>
     </AppShell>
   );
