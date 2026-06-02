@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Save, Zap } from "lucide-react";
+import { ArrowLeft, Save } from "lucide-react";
 
 export const Route = createFileRoute("/simulator")({
   head: () => ({ meta: [{ title: "Simulator — E-Light" }] }),
@@ -39,17 +39,6 @@ function Simulator() {
               backgroundSize: "32px 32px",
             }}
           />
-          <div className="relative flex h-full items-center justify-center p-6 pb-28 md:pb-6">
-            <div className="max-w-md rounded-3xl border border-border bg-card/80 p-8 text-center backdrop-blur shadow-elegant">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-primary shadow-glow">
-                <Zap className="h-6 w-6 text-primary-foreground" strokeWidth={2.5} />
-              </div>
-              <h2 className="mt-5 text-xl font-bold">Simulator canvas</h2>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Drop <code className="rounded bg-secondary px-1.5 py-0.5 text-xs">elight.html</code> in <code className="rounded bg-secondary px-1.5 py-0.5 text-xs">/public</code> and embed it here via an iframe to load the live simulator.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </AppShell>

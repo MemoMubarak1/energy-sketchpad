@@ -24,10 +24,8 @@ function Dashboard() {
             <p className="text-sm text-muted-foreground">Welcome back</p>
             <h1 className="mt-1 text-3xl font-bold">My Projects</h1>
           </div>
-          <Link to="/simulator">
-            <Button className="bg-gradient-primary shadow-elegant hover:opacity-95">
-              <Plus className="mr-1.5 h-4 w-4" /> New project
-            </Button>
+          <Link to="/home">
+            <Button variant="outline">Home</Button>
           </Link>
         </div>
 

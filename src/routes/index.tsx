@@ -29,8 +29,8 @@ function Splash() {
       <div className="relative mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-10">
         <main className="flex flex-1 flex-col justify-center py-10">
           <div className="mb-8 flex justify-center">
-            <div className="relative h-28 w-28 animate-pulse-glow rounded-2xl">
-              <img src={logoIcon.url} alt="E-Light" className="h-full w-full" />
+            <div className="relative inline-flex h-28 w-28 items-center justify-center animate-pulse-glow rounded-full">
+              <img src={logoIcon.url} alt="E-Light" className="h-[140%] w-[140%] max-w-none object-contain" />
             </div>
           </div>
 
