@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,8 @@ import {
   Fuel,
   Shield,
   Columns3,
+  Home,
+  Lightbulb,
 } from "lucide-react";
 
 export const Route = createFileRoute("/calculators")({
@@ -58,7 +60,9 @@ type CalcId =
   | "gensize"
   | "fuel"
   | "earth"
-  | "busbar";
+  | "busbar"
+  | "resload"
+  | "lighting";
 
 const calcs: { id: CalcId; name: string; desc: string; icon: typeof Zap }[] = [
   { id: "ohms", name: "Ohm's Law", desc: "V, I, R relationships", icon: Zap },
@@ -79,6 +83,8 @@ const calcs: { id: CalcId; name: string; desc: string; icon: typeof Zap }[] = [
   { id: "fuel", name: "Generator Fuel", desc: "Diesel consumption", icon: Fuel },
   { id: "earth", name: "Earthing Conductor", desc: "IEC 60364 sizing", icon: Shield },
   { id: "busbar", name: "Busbar Sizing", desc: "Copper bar ampacity", icon: Columns3 },
+  { id: "resload", name: "Residential Load", desc: "Dwelling demand load", icon: Home },
+  { id: "lighting", name: "Lighting Design", desc: "Lux from lumens & area", icon: Lightbulb },
 ];
 
 function Calculators() {
@@ -90,14 +96,6 @@ function Calculators() {
     <div className="relative min-h-screen bg-background">
       <div className="absolute inset-0 bg-gradient-hero opacity-50" />
       <div className="relative mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-8 pb-28 md:pb-8">
-        <header className="flex items-center justify-between">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" /> Home
-          </Link>
-        </header>
 
 
         <main className="mt-8 flex-1">
@@ -174,6 +172,8 @@ function Calculators() {
                   {active === "fuel" && <GenFuel />}
                   {active === "earth" && <Earthing />}
                   {active === "busbar" && <Busbar />}
+                  {active === "resload" && <ResLoad />}
+                  {active === "lighting" && <Lighting />}
                 </div>
               </div>
             </>
@@ -666,6 +666,80 @@ function Busbar() {
       </div>
       <p className="text-xs text-muted-foreground">
         Copper bar, natural convection. Derate for enclosure, ambient and stacking per IEC 61439.
+      </p>
+    </div>
+  );
+}
+
+function ResLoad() {
+  // Simplified NEC-style dwelling load: general lighting 3 VA/ft² + small appliance + laundry,
+  // then demand factors (100% first 3 kVA, 35% remainder), plus appliance & A/C loads.
+  const [area, setArea] = useState("1500");
+  const [smallApp, setSmallApp] = useState("2");
+  const [laundry, setLaundry] = useState("1");
+  const [appliances, setAppliances] = useState("8000");
+  const [ac, setAc] = useState("5000");
+  const [v, setV] = useState("240");
+
+  const general = num(area) * 3;
+  const smallVA = num(smallApp) * 1500;
+  const laundryVA = num(laundry) * 1500;
+  const lightingTotal = general + smallVA + laundryVA;
+  const demand =
+    lightingTotal <= 3000
+      ? lightingTotal
+      : 3000 + (lightingTotal - 3000) * 0.35;
+  const totalVA = demand + num(appliances) + num(ac);
+  const amps = totalVA / num(v);
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Floor area" unit="ft²" value={area} onChange={setArea} />
+        <Field label="Service" unit="V" value={v} onChange={setV} />
+        <Field label="Small-appliance circuits" value={smallApp} onChange={setSmallApp} />
+        <Field label="Laundry circuits" value={laundry} onChange={setLaundry} />
+        <Field label="Fixed appliances" unit="VA" value={appliances} onChange={setAppliances} />
+        <Field label="A/C or heat" unit="VA" value={ac} onChange={setAc} />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="Demand load" value={fmt(totalVA / 1000, 2)} unit="kVA" />
+        <Result label="Service current" value={fmt(amps, 1)} unit="A" />
+      </div>
+      <p className="text-xs text-muted-foreground">
+        NEC-style estimate (Art. 220). Verify against the applicable local code.
+      </p>
+    </div>
+  );
+}
+
+function Lighting() {
+  // Lumen method: E = (N * Φ * UF * MF) / A  →  N = (E * A) / (Φ * UF * MF)
+  const [area, setArea] = useState("25");
+  const [lux, setLux] = useState("300");
+  const [lumens, setLumens] = useState("3000");
+  const [uf, setUf] = useState("0.6");
+  const [mf, setMf] = useState("0.8");
+
+  const fixtures = (num(lux) * num(area)) / (num(lumens) * num(uf) * num(mf));
+  const totalLumens = num(lumens) * (Number.isFinite(fixtures) ? Math.ceil(fixtures) : 0);
+  const achieved = (totalLumens * num(uf) * num(mf)) / num(area);
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <Field label="Room area" unit="m²" value={area} onChange={setArea} />
+        <Field label="Target illuminance" unit="lux" value={lux} onChange={setLux} />
+        <Field label="Lumens per fixture" unit="lm" value={lumens} onChange={setLumens} />
+        <Field label="Utilisation factor" value={uf} onChange={setUf} />
+        <Field label="Maintenance factor" value={mf} onChange={setMf} />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <Result label="Fixtures required" value={Number.isFinite(fixtures) ? String(Math.ceil(fixtures)) : "—"} />
+        <Result label="Achieved illuminance" value={fmt(achieved, 0)} unit="lux" />
+      </div>
+      <p className="text-xs text-muted-foreground">
+        Lumen method: N = (E × A) / (Φ × UF × MF). Adjust UF/MF for room geometry and luminaire condition.
       </p>
     </div>
   );
