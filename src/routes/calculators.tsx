@@ -24,6 +24,8 @@ import {
   Fuel,
   Shield,
   Columns3,
+  Home,
+  Lightbulb,
 } from "lucide-react";
 
 export const Route = createFileRoute("/calculators")({
