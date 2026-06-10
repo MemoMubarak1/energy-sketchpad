@@ -172,6 +172,8 @@ function Calculators() {
                   {active === "fuel" && <GenFuel />}
                   {active === "earth" && <Earthing />}
                   {active === "busbar" && <Busbar />}
+                  {active === "resload" && <ResLoad />}
+                  {active === "lighting" && <Lighting />}
                 </div>
               </div>
             </>
