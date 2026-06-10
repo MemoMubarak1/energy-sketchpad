@@ -1,9 +1,10 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { LayoutDashboard, Cpu, Calculator, Settings, Crown, LogOut } from "lucide-react";
+import { Home, LayoutDashboard, Cpu, Calculator, Settings, Crown, LogOut } from "lucide-react";
 import { Logo } from "./Logo";
 import { cn } from "@/lib/utils";
 
 const items = [
+  { to: "/home", label: "Home", icon: Home },
   { to: "/dashboard", label: "Projects", icon: LayoutDashboard },
   { to: "/simulator", label: "Simulator", icon: Cpu },
   { to: "/calculators", label: "Calculators", icon: Calculator },
