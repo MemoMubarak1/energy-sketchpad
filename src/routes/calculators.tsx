@@ -90,14 +90,6 @@ function Calculators() {
     <div className="relative min-h-screen bg-background">
       <div className="absolute inset-0 bg-gradient-hero opacity-50" />
       <div className="relative mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-8 pb-28 md:pb-8">
-        <header className="flex items-center justify-between">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" /> Home
-          </Link>
-        </header>
 
 
         <main className="mt-8 flex-1">
