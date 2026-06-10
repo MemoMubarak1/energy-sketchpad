@@ -25,10 +25,7 @@ function Contact() {
     <div className="relative min-h-screen bg-background">
       <div className="absolute inset-0 bg-gradient-hero opacity-60" />
       <div className="relative mx-auto flex min-h-screen max-w-xl flex-col px-6 py-8">
-        <header className="flex items-center justify-between">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-4 w-4" /> Home
-          </Link>
+        <header className="flex items-center justify-center">
           <Logo className="h-8" />
         </header>
 
