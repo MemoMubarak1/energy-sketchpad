@@ -83,6 +83,8 @@ const calcs: { id: CalcId; name: string; desc: string; icon: typeof Zap }[] = [
   { id: "fuel", name: "Generator Fuel", desc: "Diesel consumption", icon: Fuel },
   { id: "earth", name: "Earthing Conductor", desc: "IEC 60364 sizing", icon: Shield },
   { id: "busbar", name: "Busbar Sizing", desc: "Copper bar ampacity", icon: Columns3 },
+  { id: "resload", name: "Residential Load", desc: "Dwelling demand load", icon: Home },
+  { id: "lighting", name: "Lighting Design", desc: "Lux from lumens & area", icon: Lightbulb },
 ];
 
 function Calculators() {
