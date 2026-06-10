@@ -60,7 +60,9 @@ type CalcId =
   | "gensize"
   | "fuel"
   | "earth"
-  | "busbar";
+  | "busbar"
+  | "resload"
+  | "lighting";
 
 const calcs: { id: CalcId; name: string; desc: string; icon: typeof Zap }[] = [
   { id: "ohms", name: "Ohm's Law", desc: "V, I, R relationships", icon: Zap },
