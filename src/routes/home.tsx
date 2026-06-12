@@ -66,22 +66,6 @@ function Home() {
           to="/dashboard"
           className="group relative mt-5 block overflow-hidden rounded-3xl border-2 border-primary/40 bg-gradient-primary p-6 text-primary-foreground shadow-elegant transition-all hover:shadow-glow"
         >
-          {/* Golden ribbon: short height, wider, bottom-right curved like the card */}
-          <div className="absolute left-0 top-0 z-10">
-            <div
-              className="flex items-center gap-1.5 py-1 pl-4 pr-7 text-[11px] font-bold uppercase tracking-wider text-[#3a2400]"
-              style={{
-                background: "linear-gradient(115deg, #8a6a1f 0%, #c9a84c 18%, #f7e8a8 38%, #ffd76a 50%, #f7e8a8 62%, #c9a84c 82%, #8a6a1f 100%)",
-                borderTopLeftRadius: "1.5rem",
-                borderBottomRightRadius: "0.875rem",
-                boxShadow: "0 4px 14px rgba(217,149,20,0.5), inset 0 1px 0 rgba(255,243,194,0.5)",
-              }}
-            >
-              <span>⚡</span>
-              <span>Featured</span>
-            </div>
-          </div>
-
           {/* Decorative grid */}
           <div
             className="pointer-events-none absolute inset-0 opacity-20"
@@ -94,7 +78,7 @@ function Home() {
           />
           <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/15 blur-2xl" />
 
-          <div className="relative pt-5">
+          <div className="relative">
             <div className="flex items-start justify-between">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm ring-1 ring-white/30">
                 <Cpu className="h-7 w-7" strokeWidth={2.4} />
