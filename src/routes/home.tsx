@@ -29,15 +29,8 @@ function Home() {
 
       <div className="relative mx-auto flex min-h-screen max-w-md flex-col px-5 py-6 pb-24">
         {/* Top bar */}
-        <header className="flex items-center justify-between">
+        <header className="flex items-center justify-center">
           <Logo className="h-9" />
-          <Link
-            to="/settings"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/60 backdrop-blur transition-colors hover:border-primary"
-            aria-label="Settings"
-          >
-            <Settings className="h-4 w-4 text-muted-foreground" />
-          </Link>
         </header>
 
         {/* Welcome */}
