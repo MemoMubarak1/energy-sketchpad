@@ -78,7 +78,7 @@ function Home() {
           />
           <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/15 blur-2xl" />
 
-          <div className="relative pt-5">
+          <div className="relative">
             <div className="flex items-start justify-between">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm ring-1 ring-white/30">
                 <Cpu className="h-7 w-7" strokeWidth={2.4} />
