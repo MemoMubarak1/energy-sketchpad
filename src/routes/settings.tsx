@@ -5,7 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
-import { User, Bell, Palette, Shield, LogOut } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { User, Bell, Palette, Shield, LogOut, Cpu } from "lucide-react";
 
 export const Route = createFileRoute("/settings")({
   head: () => ({ meta: [{ title: "Settings — E-Light" }] }),
@@ -39,6 +46,10 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
   );
 }
 
+function ComingSoon() {
+  return <span className="text-xs font-medium text-muted-foreground">Coming soon</span>;
+}
+
 function SettingsPage() {
   return (
     <AppShell>
@@ -59,17 +70,77 @@ function SettingsPage() {
             <Button className="bg-gradient-primary hover:opacity-95">Save changes</Button>
           </Section>
 
+          <Section icon={Cpu} title="Simulator" desc="Customize the simulation workspace">
+            <Row label="Show component labels"><Switch defaultChecked /></Row>
+            <Row label="Wiring style">
+              <div className="flex flex-col items-end gap-1.5">
+                <Select defaultValue="bezier" disabled>
+                  <SelectTrigger className="w-40">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="bezier">Bezier</SelectItem>
+                    <SelectItem value="orthogonal">Orthogonal</SelectItem>
+                  </SelectContent>
+                </Select>
+                <ComingSoon />
+              </div>
+            </Row>
+          </Section>
+
+          <Section icon={Palette} title="Appearance" desc="Theme & editor preferences">
+            <Row label="Zoom level">
+              <Select defaultValue="125">
+                <SelectTrigger className="w-32">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="100">100%</SelectItem>
+                  <SelectItem value="125">125%</SelectItem>
+                  <SelectItem value="150">150%</SelectItem>
+                </SelectContent>
+              </Select>
+            </Row>
+            <Row label="Color mode">
+              <div className="flex flex-col items-end gap-1.5">
+                <Select defaultValue="dark" disabled>
+                  <SelectTrigger className="w-40">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="dark">Dark Mode</SelectItem>
+                    <SelectItem value="light">Light Mode</SelectItem>
+                  </SelectContent>
+                </Select>
+                <ComingSoon />
+              </div>
+            </Row>
+            <Row label="Language">
+              <div className="flex flex-col items-end gap-1.5">
+                <Select defaultValue="english" disabled>
+                  <SelectTrigger className="w-40">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="english">English</SelectItem>
+                  </SelectContent>
+                </Select>
+                <ComingSoon />
+              </div>
+            </Row>
+          </Section>
+
           <Section icon={Bell} title="Notifications" desc="Decide what we ping you about">
             <Row label="Product updates"><Switch /></Row>
           </Section>
 
-          <Section icon={Palette} title="Appearance" desc="Theme & editor preferences">
-            <Row label="Dark mode"><Switch /></Row>
-            <Row label="Show component labels"><Switch defaultChecked /></Row>
-          </Section>
-
           <Section icon={Shield} title="Security" desc="Keep your account safe">
-            <Row label="Two-factor auth"><Switch /></Row>
+            <Row label="Two-factor auth">
+              <div className="flex flex-col items-end gap-1.5">
+                <Switch disabled />
+                <ComingSoon />
+              </div>
+            </Row>
             <Button variant="outline">Change password</Button>
           </Section>
 
