@@ -99,10 +99,7 @@ function SettingsPage() {
                   <ToggleGroupItem value="bezier" className="rounded-r-none px-3">
                     Bezier
                   </ToggleGroupItem>
-                  <ToggleGroupItem
-                    value="orthogonal"
-                    className="-ml-px rounded-l-none px-3"
-                  >
+                  <ToggleGroupItem value="orthogonal" className="-ml-px rounded-l-none px-3">
                     Orthogonal
                   </ToggleGroupItem>
                 </ToggleGroup>
