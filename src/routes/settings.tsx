@@ -48,17 +48,30 @@ function Section({
   );
 }
 
-function Row({ label, children }: { label: string; children: React.ReactNode }) {
+function Row({
+  label,
+  children,
+  comingSoon = false,
+}: {
+  label: string;
+  children: React.ReactNode;
+  comingSoon?: boolean;
+}) {
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
-      <Label className="text-sm">{label}</Label>
-      {children}
+    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1.5">
+      <Label className="text-sm leading-9">{label}</Label>
+      <div className="flex min-h-9 items-center justify-center">{children}</div>
+      {comingSoon && (
+        <div className="col-start-2 flex justify-center">
+          <ComingSoon />
+        </div>
+      )}
     </div>
   );
 }
 
 function ComingSoon() {
-  return <span className="text-xs font-semibold text-accent">Coming soon</span>;
+  return <span className="text-xs font-semibold text-primary">Coming soon</span>;
 }
 
 function SettingsPage() {
@@ -87,24 +100,21 @@ function SettingsPage() {
             <Row label="Show component labels">
               <Switch defaultChecked />
             </Row>
-            <Row label="Wiring style">
-              <div className="flex flex-col items-center gap-1.5">
-                <ToggleGroup
-                  type="single"
-                  defaultValue="bezier"
-                  disabled
-                  variant="outline"
-                  className="gap-0 overflow-hidden rounded-md opacity-60"
-                >
-                  <ToggleGroupItem value="bezier" className="rounded-r-none px-3">
-                    Bezier
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="orthogonal" className="-ml-px rounded-l-none px-3">
-                    Orthogonal
-                  </ToggleGroupItem>
-                </ToggleGroup>
-                <ComingSoon />
-              </div>
+            <Row label="Wiring style" comingSoon>
+              <ToggleGroup
+                type="single"
+                defaultValue="bezier"
+                disabled
+                variant="outline"
+                className="gap-0 overflow-hidden rounded-md opacity-60"
+              >
+                <ToggleGroupItem value="bezier" className="rounded-r-none px-3">
+                  Bezier
+                </ToggleGroupItem>
+                <ToggleGroupItem value="orthogonal" className="-ml-px rounded-l-none px-3">
+                  Orthogonal
+                </ToggleGroupItem>
+              </ToggleGroup>
             </Row>
           </Section>
 
@@ -121,37 +131,31 @@ function SettingsPage() {
                 </SelectContent>
               </Select>
             </Row>
-            <Row label="Theme">
-              <div className="flex flex-col items-center gap-1.5">
-                <ToggleGroup
-                  type="single"
-                  defaultValue="light"
-                  disabled
-                  variant="outline"
-                  className="gap-0 overflow-hidden rounded-md opacity-60"
-                >
-                  <ToggleGroupItem value="light" className="rounded-r-none px-4">
-                    Light
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="dark" className="-ml-px rounded-l-none px-4">
-                    Dark
-                  </ToggleGroupItem>
-                </ToggleGroup>
-                <ComingSoon />
-              </div>
+            <Row label="Theme" comingSoon>
+              <ToggleGroup
+                type="single"
+                defaultValue="light"
+                disabled
+                variant="outline"
+                className="gap-0 overflow-hidden rounded-md opacity-60"
+              >
+                <ToggleGroupItem value="light" className="rounded-r-none px-4">
+                  Light
+                </ToggleGroupItem>
+                <ToggleGroupItem value="dark" className="-ml-px rounded-l-none px-4">
+                  Dark
+                </ToggleGroupItem>
+              </ToggleGroup>
             </Row>
-            <Row label="Language">
-              <div className="flex flex-col items-center gap-1.5">
-                <Select defaultValue="english" disabled>
-                  <SelectTrigger className="w-40">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="english">English</SelectItem>
-                  </SelectContent>
-                </Select>
-                <ComingSoon />
-              </div>
+            <Row label="Language" comingSoon>
+              <Select defaultValue="english" disabled>
+                <SelectTrigger className="w-40">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="english">English</SelectItem>
+                </SelectContent>
+              </Select>
             </Row>
           </Section>
 
@@ -162,11 +166,8 @@ function SettingsPage() {
           </Section>
 
           <Section icon={Shield} title="Security" desc="Keep your account safe">
-            <Row label="Two-factor auth">
-              <div className="flex flex-col items-center gap-1.5">
-                <Switch disabled />
-                <ComingSoon />
-              </div>
+            <Row label="Two-factor auth" comingSoon>
+              <Switch disabled />
             </Row>
             <Button variant="outline">Change password</Button>
           </Section>

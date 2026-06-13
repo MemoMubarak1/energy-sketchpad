@@ -14,6 +14,7 @@ const plans = [
   {
     id: "monthly",
     name: "Monthly",
+    oldPrice: "$4.55",
     price: "$2.99",
     cadence: "/mo",
     save: null,
@@ -21,6 +22,7 @@ const plans = [
   {
     id: "quarterly",
     name: "Quarterly",
+    oldPrice: "$11.99",
     price: "$7.99",
     cadence: "/3mo",
     save: "Save 11%",
@@ -28,6 +30,7 @@ const plans = [
   {
     id: "yearly",
     name: "Yearly",
+    oldPrice: "$39.99",
     price: "$24.99",
     cadence: "/yr",
     save: "Best value",
@@ -35,12 +38,12 @@ const plans = [
 ];
 
 const features = [
-  "Unlimited projects",
-  "Advanced components (op-amps, ICs, microcontrollers)",
-  "Real-time oscilloscope & spectrum analyzer",
-  "Export to PDF / Netlist / Gerber",
-  "Cloud sync across devices",
-  "Priority support",
+  "Full Simulator Access",
+  "All 127 components unlocked",
+  "See the equation behind every calculator",
+  "No ads — ever",
+  "Cloud sync — build on one device, continue on another",
+  "One subscription — every platform",
 ];
 
 function Subscription() {
@@ -57,7 +60,11 @@ function Subscription() {
           <p className="mt-3 text-muted-foreground">Power tools for engineers, students and tinkerers.</p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="mx-auto mt-8 w-fit rounded-full bg-gradient-primary px-5 py-2 text-center text-xs font-bold tracking-widest text-primary-foreground shadow-elegant">
+          EARLY LAUNCH PRICE — FIRST SUBSCRIBERS
+        </div>
+
+        <div className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {plans.map((p) => {
             const active = selected === p.id;
             return (
@@ -75,7 +82,10 @@ function Subscription() {
                   </span>
                 )}
                 <p className="text-sm font-medium text-muted-foreground">{p.name}</p>
-                <div className="mt-2 flex items-baseline gap-1">
+                <p className="mt-3 text-sm text-muted-foreground line-through decoration-destructive decoration-2">
+                  {p.oldPrice}
+                </p>
+                <div className="mt-1 flex items-baseline gap-1">
                   <span className="text-3xl font-bold">{p.price}</span>
                   <span className="text-sm text-muted-foreground">{p.cadence}</span>
                 </div>
@@ -95,7 +105,7 @@ function Subscription() {
         <div className="mt-8 rounded-3xl border border-border bg-card p-6">
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-primary" />
-            <h2 className="font-semibold">Everything in Pro</h2>
+            <h2 className="font-semibold">Pro Features</h2>
           </div>
           <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {features.map((f) => (
