@@ -12,14 +12,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { User, Bell, Palette, Shield, LogOut, Cpu } from "lucide-react";
+import { User, Bell, Palette, Shield, LogOut, Cpu, type LucideIcon } from "lucide-react";
 
 export const Route = createFileRoute("/settings")({
   head: () => ({ meta: [{ title: "Settings — E-Light" }] }),
   component: SettingsPage,
 });
 
-function Section({ icon: Icon, title, desc, children }: { icon: any; title: string; desc: string; children: React.ReactNode }) {
+function Section({
+  icon: Icon,
+  title,
+  desc,
+  children,
+}: {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  children: React.ReactNode;
+}) {
   return (
     <section className="rounded-2xl border border-border bg-card p-6">
       <div className="flex items-start gap-3">
@@ -55,7 +65,9 @@ function SettingsPage() {
     <AppShell>
       <div className="mx-auto max-w-3xl px-6 py-10 pb-24 md:pb-10">
         <h1 className="text-3xl font-bold">Settings</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Manage your account, app preferences and security.</p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Manage your account, app preferences and security.
+        </p>
 
         <div className="mt-8 space-y-6">
           <Section icon={User} title="Profile" desc="Your personal info">
@@ -71,7 +83,9 @@ function SettingsPage() {
           </Section>
 
           <Section icon={Cpu} title="Simulator" desc="Customize the simulation workspace">
-            <Row label="Show component labels"><Switch defaultChecked /></Row>
+            <Row label="Show component labels">
+              <Switch defaultChecked />
+            </Row>
             <Row label="Wiring style">
               <div className="flex flex-col items-end gap-1.5">
                 <Select defaultValue="bezier" disabled>
@@ -131,7 +145,9 @@ function SettingsPage() {
           </Section>
 
           <Section icon={Bell} title="Notifications" desc="Decide what we ping you about">
-            <Row label="Product updates"><Switch /></Row>
+            <Row label="Product updates">
+              <Switch />
+            </Row>
           </Section>
 
           <Section icon={Shield} title="Security" desc="Keep your account safe">
@@ -144,7 +160,10 @@ function SettingsPage() {
             <Button variant="outline">Change password</Button>
           </Section>
 
-          <Link to="/" className="flex items-center justify-center gap-2 rounded-2xl border border-border bg-card py-4 text-sm font-medium text-destructive hover:bg-destructive/5">
+          <Link
+            to="/"
+            className="flex items-center justify-center gap-2 rounded-2xl border border-border bg-card py-4 text-sm font-medium text-destructive hover:bg-destructive/5"
+          >
             <LogOut className="h-4 w-4" /> Sign out
           </Link>
         </div>
